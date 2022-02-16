@@ -40,16 +40,17 @@ const HomePage = () => {
             <Loader darkMode />
           </div>
           : <div className="flex -mx-2">
-            {(data as any)?.length === 0
-              ? <div>No results</div>
-              : (data as any).filter((user: any) => user?.display).map((user: any) => <Link to={`/users/${user?.display}`} key={`user-${user?.id}`} className="mx-4 block rounded border border-gray-200 shadow-lg hover:scale-105 transition-all ease-in-out duration-300">
+            {(data as any)?.filter((user: any) => user?.display)?.length > 0
+              ? (data as any).filter((user: any) => user?.display).map((user: any) => <Link to={`/users/${user?.display}`} key={`user-${user?.id}`} className="mx-4 block rounded border border-gray-200 shadow-lg hover:scale-105 transition-all ease-in-out duration-300">
                 <div className="p-4">
                   <span className="block relative bg-gray-400 rounded mb-2">
                     <img className="block w-80" src={`data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=`} />
                     <span className="h-4 leading-4 text-gray-600 text-center absolute inset-0 m-auto">{user?.display}</span>
                   </span>
                 </div>
-              </Link>)}
+              </Link>)
+              : <div>No results</div>
+            }
           </div>}
       </div>
     </PageLayout>
